@@ -35,10 +35,10 @@ export class TripDataService {
   }
 
   
-  AddTripComponent(formData: Trip) : Observable<Trip> {
-    return this.http.post<Trip>(this.url, FormData);
+  // AddTripComponent(formData: Trip) : Observable<Trip> {
+  //  return this.http.post<Trip>(this.url, FormData);
   
-  }
+ // }
 }
 
 

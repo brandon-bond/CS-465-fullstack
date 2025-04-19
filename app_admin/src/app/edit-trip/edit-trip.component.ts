@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angula
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip'; 
 
+
 @Component({
   selector: 'app-edit-trip',
   standalone: true,
@@ -12,6 +13,8 @@ import { Trip } from '../models/trip';
   templateUrl: './edit-trip.component.html',
   styleUrl: './edit-trip.component.css',
 }) 
+
+export class EditTripComponent implements OnInit {
 
 public editForm!: FormGroup;
  trip!: Trip;
@@ -24,7 +27,7 @@ public editForm!: FormGroup;
   private tripDataService: TripDataService
 ) {}
 
-export class EditTripComponent implements OnInit {
+
   ngOnInit() : void{
     // Retrieve stashed trip ID
     
@@ -92,3 +95,4 @@ public onSubmit()
 
  // get the form short name to access the form fields
  get f() { return this.editForm.controls; } 
+}

@@ -53,38 +53,39 @@ const tripsFindByCode = async(req, res) => {
 };
 
 
+// POST: /trips - Adds a new Trip
 // Regardless of outcome, response must include HTML status code
 // and JSON message to the requesting client
 const tripsAddTrip = async(req, res) => {
-    const q = await Model
-        .create({
-            code: req.body.code,
-            name: req.body.name,
-            length: req.body.length,
-            start: req.body.start,
-            resort: req.body.resort,
-            perPerson: req.body.perPerson,
-            image: req.body.image,
-            description: req.body.description
-        },
-        (err, trip) => {
-            if(err) 
-            { // Datbase returned no data
-                return res
-                    .status(500)
-                    .json({ message: 'Error creating trip.' });
-            } else { // Return resulting trip list
-                return res
-                    .status(201)
-                    .json(trip);
-            }
-        
-        // Uncomment the following line to show results of operation
-        // on the console
-        // console.log(trip);
-        });
+    const newTrip = new Trip({
+        code: req.body.code,
+        name: req.body.name,
+        length: req.body.length,
+        start: req.body.start,
+        resort: req.body.resort,
+        perPerson: req.body.perPerson,
+        image: req.body.image,
+        description: req.body.description
+    });
+ 
+const q = await newTrip.save();
+ 
+    if(!q)
+    { // Database returned no data
+        return res
+            .status(400)
+            .json(err);
+    } else { // Return new trip
+        return res
+            .status(201)
+            .json(q);
+    }
+ 
+    // Uncomment the following line to show result of operation
+    // on the console
+    // console.log(q);
 };
-
+ 
 // PUT: /trips/:tripCode - Adds a new Trip  
 // Regardless of outcome, response must include HTML status code  
 // and JSON message to the requesting client  
